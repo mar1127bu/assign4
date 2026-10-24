@@ -8,8 +8,8 @@ st.title("Microsoft Stock Data Dashboard by Michael Romero")
 # Read CSV file with stock data (CSV file must be in 'main' folder for your assignment 4 repository) 
 df = pd.read_csv("msft.csv")
 
-# Set up the 3 tabs on the Dashboard
-tabs = st.tabs(["📋 Raw Data", "📈 Price Chart", "📊 Volume Chart"])
+# Set up the 4 tabs on the Dashboard
+tabs = st.tabs(["📋 Raw Data", "📈 Price Chart", "📊 Volume Chart", ])
 
 # Tab 1: Raw Data
 with tabs[0]:
@@ -25,3 +25,15 @@ with tabs[1]:
 with tabs[2]:
     st.subheader(f"Volume for MSFT")
     st.bar_chart(df['Volume'])
+
+# Tab 4: Price Regression on Volume
+with tabs[3]:
+    #MSFT CAPM Regression
+    y = df["Close"]
+    X = df["Volume"]
+    # Use statsmodels
+    X = sm.add_constant(X) # adding a constant
+    model = sm.OLS(y, X).fit()
+
+    # Render the summary on the Streamlit dashboard as preformatted text
+    st.text(str(model.summary()))
