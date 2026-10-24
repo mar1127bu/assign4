@@ -1,7 +1,7 @@
 # Import necessary packages (Make sure to also include in "requirements.txt" in this repository.)
 import streamlit as st
 import pandas as pd
-import statsmodels as sm
+import statsmodels.api as sm
 
 # Print Title for the App
 st.title("Microsoft Stock Data Dashboard by Michael Romero")
@@ -30,22 +30,22 @@ with tabs[2]:
 # Tab 4: Price Regression on Volume
 with tabs[3]:
     st.subheader("Price Regression on Volume")
-    
-    # Prepare clean, numeric data for the regression
+
     reg_df = df[['Close', 'Volume']].copy()
     reg_df['Close'] = pd.to_numeric(reg_df['Close'], errors='coerce')
     reg_df['Volume'] = pd.to_numeric(reg_df['Volume'], errors='coerce')
     reg_df = reg_df.dropna()
-    
+
     if not reg_df.empty:
         y = reg_df["Close"]
-        X = reg_df["Volume"]
-        
-        # Use statsmodels
+        X = reg_df[["Volume"]]
+
         X = sm.add_constant(X)
         model = sm.OLS(y, X).fit()
 
-        # Render the summary on the Streamlit dashboard as preformatted text
         st.text(str(model.summary()))
     else:
-        st.error("Unable to run regression: No valid numeric data found in 'Close' or 'Volume' columns.")
+        st.error(
+            "Unable to run regression: No valid numeric data found "
+            "in 'Close' or 'Volume' columns."
+        )
