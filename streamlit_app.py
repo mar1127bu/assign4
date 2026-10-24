@@ -1,7 +1,7 @@
 # Import necessary packages (Make sure to also include in "requirements.txt" in this repository.)
 import streamlit as st
 import pandas as pd
-import statsmodels.api as sm
+import statsmodels as sm
 
 # Print Title for the App
 st.title("Microsoft Stock Data Dashboard by Michael Romero")
