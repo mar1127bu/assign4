@@ -4,7 +4,7 @@ import pandas as pd
 import statsmodels.api as sm
 
 # Print Title for the App
-st.title("Microsoft Stock Data Dashboard by Michael Romero")
+st.title("Microsoft Stock Data Dashboard by Michael R")
 
 # Read CSV file with stock data (CSV file must be in 'main' folder for your assignment 4 repository) 
 df = pd.read_csv("msft.csv")
